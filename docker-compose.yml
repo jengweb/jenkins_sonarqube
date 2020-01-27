@@ -1,0 +1,40 @@
+version: "3.5"
+
+services:
+  sonarqube:
+    container_name: sonarqube
+    build: .
+    ports:
+      - 9000:9000
+    depends_on:
+      - sonarqubedb
+    environment:
+      - SONARQUBE_JDBC_URL=jdbc:mysql://sonarqubedb:3306/sonar?useUnicode=true&characterEncoding=utf8
+      - SONARQUBE_JDBC_USERNAME=sonar
+      - SONARQUBE_JDBC_PASSWORD=isyl]y[sonarqube
+    restart: always
+
+  sonarqubedb:
+    container_name: sonarqubedb
+    image: mysql:5.7.29
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: sonar
+      MYSQL_USER: sonar
+      MYSQL_PASSWORD: isyl]y[sonarqube
+      MYSQL_ROOT_PASSWORD: isyl]y[sonarqube
+    restart: always
+
+  jenkins:
+    container_name: jenkins
+    build:
+      context: ./jenkins-docker
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - ./app/data/jenkins_home:/var/jenkins_home
+      - ./app/config/executors.groovy:/usr/share/jenkins/ref/init.groovy.d/executors.groovy
+    restart: always
