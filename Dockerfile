@@ -7,7 +7,7 @@ RUN apt-get update \
 ENV SONAR_VERSION=7.9.2 \
     SONARQUBE_HOME=/opt/sonarqube \
     SONARQUBE_JDBC_USERNAME=sonar \
-    SONARQUBE_JDBC_PASSWORD=sonar \
+    SONARQUBE_JDBC_PASSWORD=isyl]y[sonarqube \
     SONARQUBE_JDBC_URL=""
 
 # Http port
