@@ -8,7 +8,7 @@ ENV SONAR_VERSION=7.9.2 \
     SONARQUBE_HOME=/opt/sonarqube \
     SONARQUBE_JDBC_USERNAME=sonar \
     SONARQUBE_JDBC_PASSWORD=isyl]y[sonarqube \
-    SONARQUBE_JDBC_URL=""
+    SONARQUBE_JDBC_URL="jdbc:postgresql://sonarqubedb:5432/sonar"
 
 # Http port
 EXPOSE 9000

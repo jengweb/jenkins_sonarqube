@@ -6,44 +6,25 @@ services:
     build: .
     ports:
       - 9000:9000
+    volumes:
+      - ./sonarqube/conf:/opt/sonarqube/conf
+      - ./sonarqube/extensions:/opt/sonarqube/extensions
+      - ./sonarqube/logs:/opt/sonarqube/logs
+      - ./sonarqube/data:/opt/sonarqube/data
     depends_on:
-      - es01
+      - sonarqubedb
     restart: always
 
-  es01:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.1
-    container_name: es01
+  sonarqubedb:
+    container_name: sonarqubedb
+    image: postgres
     environment:
-      - node.name=es01
-      - discovery.seed_hosts=es02
-      - cluster.initial_master_nodes=es01,es02
-      - cluster.name=docker-cluster
-      - bootstrap.memory_lock=true
-      - ES_JAVA_OPTS=-Xms1g -Xmx1g
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=isyl]y[sonarqube
     volumes:
-      - ./esdata01:/usr/share/elasticsearch/data
-    restart: always
-
-  es02:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.1
-    container_name: es02
-    environment:
-      - node.name=es02
-      - discovery.seed_hosts=es01
-      - cluster.initial_master_nodes=es01,es02
-      - cluster.name=docker-cluster
-      - bootstrap.memory_lock=true
-      - ES_JAVA_OPTS=-Xms1g -Xmx1g
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    volumes:
-      - ./esdata02:/usr/share/elasticsearch/data
+      - ./postgresql:/var/lib/postgresql
+      # This needs explicit mapping due to https://github.com/docker-library/postgres/blob/4e48e3228a30763913ece952c611e5e9b95c8759/Dockerfile.template#L52
+      - ./postgresql/data:/var/lib/postgresql/data
     restart: always
 
   jenkins:
