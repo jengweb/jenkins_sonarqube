@@ -38,4 +38,6 @@ services:
     volumes:
       - ./app/data/jenkins_home:/var/jenkins_home
       - ./app/config/executors.groovy:/usr/share/jenkins/ref/init.groovy.d/executors.groovy
+    depends_on:
+      - sonarqube
     restart: always
