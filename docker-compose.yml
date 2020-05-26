@@ -6,11 +6,11 @@ services:
     build: .
     ports:
       - 9000:9000
-    volumes:
-      - ./sonarqube/conf:/opt/sonarqube/conf
-      - ./sonarqube/extensions:/opt/sonarqube/extensions
-      - ./sonarqube/logs:/opt/sonarqube/logs
-      - ./sonarqube/data:/opt/sonarqube/data
+    # volumes:
+    #   - ./sonarqube/conf:/opt/sonarqube/conf
+    #   - ./sonarqube/extensions:/opt/sonarqube/extensions
+    #   - ./sonarqube/logs:/opt/sonarqube/logs
+    #   - ./sonarqube/data:/opt/sonarqube/data
     depends_on:
       - sonarqubedb
     restart: always
