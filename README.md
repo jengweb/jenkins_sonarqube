@@ -2,6 +2,10 @@
 
 Sonarqube
 ```
+Ubuntu Server Before docker-compose up -d
+sudo sysctl -w vm.max_map_count=262144
+```
+```
   UserName: admin
   Password: admin
 ```
