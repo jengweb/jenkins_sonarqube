@@ -42,17 +42,17 @@ services:
       - sonarqube
     restart: always
   
-  registry:
-    container_name: registry
-    image: registry:2
-    ports:
-    - 5000:5000
-    environment:
-    - REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY=/data
-    - REGISTRY_HTTP_ADDR=0.0.0.0:5000
-    volumes:
-      - ./registry/data:/data
-    restart: always
+  # registry:
+  #   container_name: registry
+  #   image: registry:2
+  #   ports:
+  #   - 5000:5000
+  #   environment:
+  #   - REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY=/data
+  #   - REGISTRY_HTTP_ADDR=0.0.0.0:5000
+  #   volumes:
+  #     - ./registry/data:/data
+  #   restart: always
 
   # artifactory:
   #   container_name: artifactory
